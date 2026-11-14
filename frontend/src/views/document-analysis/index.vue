@@ -94,7 +94,7 @@ async function execute(isResume: boolean, approved = false) {
     await streamRun(`/api/analyses/${id}/${isResume ? 'resume' : 'run'}`,
       isResume ? { approved } : {}, getCsrfToken(), controller.signal, (event) => {
         if (event.type === 'progress') progress.value = event.message
-        if (event.type === 'paused' && selected.value) {
+        if (event.type === 'paused' && 'review' in event && selected.value) {
           selected.value.review = event.review
           selected.value.status = 'paused'
         }

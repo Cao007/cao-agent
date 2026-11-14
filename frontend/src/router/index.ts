@@ -6,10 +6,12 @@ export const router = createRouter({
   scrollBehavior: () => ({ top: 0 }),
   routes: [
     { path: '/login', component: () => import('../views/auth/index.vue') },
-    { path: '/', redirect: '/chat' },
+    { path: '/', redirect: '/support' },
+    { path: '/support', component: () => import('../views/customer-service/index.vue') },
+    { path: '/operations', component: () => import('../views/customer-service/operations/index.vue') },
     { path: '/chat', component: () => import('../views/chat/index.vue') },
     { path: '/analysis', component: () => import('../views/document-analysis/index.vue') },
-    { path: '/:pathMatch(.*)*', redirect: '/chat' },
+    { path: '/:pathMatch(.*)*', redirect: '/support' },
   ],
 })
 
@@ -22,5 +24,5 @@ router.beforeEach(async (to) => {
     if (to.path !== '/login') return '/login'
   }
   if (!auth.user && to.path !== '/login') return '/login'
-  if (auth.user && to.path === '/login') return '/chat'
+  if (auth.user && to.path === '/login') return '/support'
 })

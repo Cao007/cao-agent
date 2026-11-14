@@ -5,6 +5,8 @@ export type RunEvent =
   | { type: 'token'; content: string }
   | { type: 'progress'; message: string }
   | { type: 'paused'; review: components['schemas']['Extraction'] }
+  | { type: 'paused'; orders: components['schemas']['OrderInfo'][] }
+  | { type: 'support_answer'; answer: components['schemas']['SupportMessage'] }
   | { type: 'result'; result: components['schemas']['Extraction'] | null }
   | { type: 'done' }
   | { type: 'error'; message: string; run_id: string }

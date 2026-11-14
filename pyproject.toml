@@ -9,6 +9,7 @@ dependencies = [
   "pydantic-settings>=2.8,<3",
   "langchain>=1,<2",
   "langchain-openai>=1,<2",
+  "langchain-text-splitters>=1,<2",
   "langgraph>=1,<2",
   "langgraph-checkpoint-postgres>=3,<4",
   "sqlalchemy[asyncio]>=2.0,<3",

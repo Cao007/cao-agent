@@ -1,10 +1,10 @@
 <template>
   <main class="auth-page">
     <section class="auth-page__intro">
-      <div class="auth-page__brand">✦ Cao AI</div>
-      <h1>让 AI 成为<br />业务的一部分。</h1>
-      <p>从连续对话到文档抽取，<br />在同一个工作空间完成你的任务。</p>
-      <span>FASTAPI · LANGGRAPH · VUE</span>
+      <div class="auth-page__brand">✳ MewHelp</div>
+      <h1>每个问题，<br />都有下一步。</h1>
+      <p>查订单、看物流、了解退货规则。<br />让服务更清晰，让等待更少一点。</p>
+      <span>有依据的回答 · 连续的服务</span>
     </section>
     <section class="auth-page__form">
       <h2>{{ isRegister ? '创建账户' : '欢迎回来' }}</h2>
@@ -48,7 +48,7 @@ async function handleSubmit() {
   try {
     await auth.login(username.value, password.value, isRegister.value)
     password.value = ''
-    await router.push('/chat')
+    await router.push('/support')
   } catch (cause) {
     error.value = cause instanceof Error ? cause.message : '登录失败，请稍后重试。'
   } finally {
