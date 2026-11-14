@@ -1,0 +1,35 @@
+[project]
+name = "ai-app-foundation"
+version = "0.1.0"
+description = "A small FastAPI, Vue and LangGraph foundation for AI applications."
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.34,<1",
+  "pydantic-settings>=2.8,<3",
+  "langchain>=1,<2",
+  "langchain-openai>=1,<2",
+  "langgraph>=1,<2",
+  "langgraph-checkpoint-postgres>=3,<4",
+  "sqlalchemy[asyncio]>=2.0,<3",
+  "psycopg[binary,pool]>=3.2,<4",
+  "alembic>=1.16,<2",
+  "pwdlib[argon2]>=0.3,<1",
+]
+
+[project.optional-dependencies]
+rag = ["langchain-text-splitters>=1,<2"]
+
+[dependency-groups]
+dev = ["httpx>=0.28,<1", "ruff>=0.11,<1", "pytest>=8,<10"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["."]

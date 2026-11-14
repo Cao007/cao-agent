@@ -1,0 +1,4 @@
+- [三层开发指南](DEVELOPMENT.md)
+- [流式通信取舍](STREAMING.md)
+- [首版验收记录](VERIFICATION.md)
+- `openapi.json`：从后端导出的接口契约，用于生成前端类型。
