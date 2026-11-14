@@ -5,6 +5,7 @@ from alembic import context
 from backend.app.core.config import Settings
 from backend.app.db.session import Base, create_database
 from backend.app.modules.auth import models as auth_models  # noqa: F401
+from backend.app.modules.customer_service import models as support_models  # noqa: F401
 from backend.app.modules.document_analysis import models as analysis_models  # noqa: F401
 from backend.app.modules.threads import models as thread_models  # noqa: F401
 

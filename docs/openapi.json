@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Cao AI",
+    "title": "MewHelp",
     "version": "0.1.0"
   },
   "paths": {
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReviewInput"
+                "$ref": "#/components/schemas/backend__app__modules__document_analysis__schemas__ReviewInput"
               }
             }
           }
@@ -457,6 +457,805 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/profile": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Profile",
+        "operationId": "profile_api_support_profile_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupportProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/orders": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "List Orders",
+        "operationId": "list_orders_api_support_orders_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/OrderInfo"
+                  },
+                  "type": "array",
+                  "title": "Response List Orders Api Support Orders Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/demo-orders": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Demo Orders",
+        "operationId": "demo_orders_api_support_demo_orders_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/OrderInfo"
+                  },
+                  "type": "array",
+                  "title": "Response Demo Orders Api Support Demo Orders Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/threads": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Threads",
+        "operationId": "threads_api_support_threads_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ThreadInfo"
+                  },
+                  "type": "array",
+                  "title": "Response Threads Api Support Threads Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Create Thread",
+        "operationId": "create_thread_api_support_threads_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThreadCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThreadInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/threads/{thread_id}": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Detail",
+        "operationId": "detail_api_support_threads__thread_id__get",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Thread Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupportThread"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/threads/{thread_id}/messages": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Send",
+        "operationId": "send_api_support_threads__thread_id__messages_post",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Thread Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/threads/{thread_id}/resume": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Resume",
+        "operationId": "resume_api_support_threads__thread_id__resume_post",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Thread Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderSelection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/threads/{thread_id}/retry": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Retry",
+        "operationId": "retry_api_support_threads__thread_id__retry_post",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Thread Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/turns/{turn_id}/feedback": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Feedback",
+        "operationId": "feedback_api_support_turns__turn_id__feedback_post",
+        "parameters": [
+          {
+            "name": "turn_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Turn Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/turns/{turn_id}/handoff": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Handoff",
+        "operationId": "handoff_api_support_turns__turn_id__handoff_post",
+        "parameters": [
+          {
+            "name": "turn_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Turn Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/dashboard": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Overview",
+        "operationId": "overview_api_support_admin_dashboard_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dashboard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/knowledge": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Knowledge List",
+        "operationId": "knowledge_list_api_support_admin_knowledge_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/KnowledgeInfo"
+                  },
+                  "type": "array",
+                  "title": "Response Knowledge List Api Support Admin Knowledge Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Knowledge Create",
+        "operationId": "knowledge_create_api_support_admin_knowledge_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/knowledge/{knowledge_id}": {
+      "put": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Knowledge Update",
+        "operationId": "knowledge_update_api_support_admin_knowledge__knowledge_id__put",
+        "parameters": [
+          {
+            "name": "knowledge_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Knowledge Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/knowledge/{knowledge_id}/archive": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Archive",
+        "operationId": "archive_api_support_admin_knowledge__knowledge_id__archive_post",
+        "parameters": [
+          {
+            "name": "knowledge_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Knowledge Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/reviews": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Reviews",
+        "operationId": "reviews_api_support_admin_reviews_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/TurnInfo"
+                  },
+                  "type": "array",
+                  "title": "Response Reviews Api Support Admin Reviews Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/reviews/{turn_id}": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Review",
+        "operationId": "review_api_support_admin_reviews__turn_id__post",
+        "parameters": [
+          {
+            "name": "turn_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Turn Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/backend__app__modules__customer_service__schemas__ReviewInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TurnInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/evaluation-cases": {
+      "get": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Evaluation Cases",
+        "operationId": "evaluation_cases_api_support_admin_evaluation_cases_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EvaluationInfo"
+                  },
+                  "type": "array",
+                  "title": "Response Evaluation Cases Api Support Admin Evaluation Cases Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Add Case",
+        "operationId": "add_case_api_support_admin_evaluation_cases_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/evaluation-cases/{case_id}": {
+      "put": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Update Case",
+        "operationId": "update_case_api_support_admin_evaluation_cases__case_id__put",
+        "parameters": [
+          {
+            "name": "case_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Case Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/support/admin/evaluate": {
+      "post": {
+        "tags": [
+          "customer_service"
+        ],
+        "summary": "Run Evaluation",
+        "operationId": "run_evaluation_api_support_admin_evaluate_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationResult"
                 }
               }
             }
@@ -574,6 +1373,40 @@
         ],
         "title": "ChatInput"
       },
+      "Citation": {
+        "properties": {
+          "number": {
+            "type": "integer",
+            "title": "Number"
+          },
+          "knowledge_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Knowledge Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "number",
+          "knowledge_id",
+          "title",
+          "content",
+          "score"
+        ],
+        "title": "Citation"
+      },
       "Credentials": {
         "properties": {
           "username": {
@@ -622,6 +1455,248 @@
         ],
         "title": "CurrentUser"
       },
+      "Dashboard": {
+        "properties": {
+          "knowledge_count": {
+            "type": "integer",
+            "title": "Knowledge Count"
+          },
+          "indexed_count": {
+            "type": "integer",
+            "title": "Indexed Count"
+          },
+          "pending_count": {
+            "type": "integer",
+            "title": "Pending Count"
+          },
+          "handoff_count": {
+            "type": "integer",
+            "title": "Handoff Count"
+          },
+          "conversations": {
+            "type": "integer",
+            "title": "Conversations"
+          },
+          "mode": {
+            "type": "string",
+            "title": "Mode"
+          },
+          "threshold": {
+            "type": "number",
+            "title": "Threshold"
+          },
+          "evaluation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "usage": {
+            "items": {
+              "$ref": "#/components/schemas/IntentUsage"
+            },
+            "type": "array",
+            "title": "Usage"
+          },
+          "topics": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Topics"
+          }
+        },
+        "type": "object",
+        "required": [
+          "knowledge_count",
+          "indexed_count",
+          "pending_count",
+          "handoff_count",
+          "conversations",
+          "mode",
+          "threshold",
+          "evaluation",
+          "usage",
+          "topics"
+        ],
+        "title": "Dashboard"
+      },
+      "EvaluationInfo": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Question"
+          },
+          "expected_knowledge_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Knowledge Id"
+          },
+          "intent": {
+            "type": "string",
+            "enum": [
+              "knowledge",
+              "order",
+              "logistics",
+              "refund",
+              "greeting"
+            ],
+            "title": "Intent"
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Source",
+            "default": "运营录入"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question",
+          "intent",
+          "id"
+        ],
+        "title": "EvaluationInfo"
+      },
+      "EvaluationInput": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Question"
+          },
+          "expected_knowledge_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Knowledge Id"
+          },
+          "intent": {
+            "type": "string",
+            "enum": [
+              "knowledge",
+              "order",
+              "logistics",
+              "refund",
+              "greeting"
+            ],
+            "title": "Intent"
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Source",
+            "default": "运营录入"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question",
+          "intent"
+        ],
+        "title": "EvaluationInput"
+      },
+      "EvaluationResult": {
+        "properties": {
+          "mode": {
+            "type": "string",
+            "title": "Mode"
+          },
+          "dataset_size": {
+            "type": "integer",
+            "title": "Dataset Size"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Sources"
+          },
+          "strategies": {
+            "items": {
+              "$ref": "#/components/schemas/StrategyMetric"
+            },
+            "type": "array",
+            "title": "Strategies"
+          },
+          "classifier_accuracy": {
+            "type": "number",
+            "title": "Classifier Accuracy"
+          },
+          "confusion": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Confusion"
+          },
+          "recommended_threshold": {
+            "type": "number",
+            "title": "Recommended Threshold"
+          },
+          "threshold_accuracy": {
+            "type": "number",
+            "title": "Threshold Accuracy"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "dataset_size",
+          "sources",
+          "strategies",
+          "classifier_accuracy",
+          "confusion",
+          "recommended_threshold",
+          "threshold_accuracy"
+        ],
+        "title": "EvaluationResult"
+      },
       "Extraction": {
         "properties": {
           "title": {
@@ -661,6 +1736,23 @@
         "title": "Extraction",
         "description": "HTTP 业务结果；图状态通过显式映射返回此 schema。"
       },
+      "FeedbackInput": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "title": "FeedbackInput"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -673,6 +1765,147 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "IntentUsage": {
+        "properties": {
+          "intent": {
+            "type": "string",
+            "title": "Intent"
+          },
+          "calls": {
+            "type": "integer",
+            "title": "Calls"
+          },
+          "input_tokens": {
+            "type": "integer",
+            "title": "Input Tokens"
+          },
+          "output_tokens": {
+            "type": "integer",
+            "title": "Output Tokens"
+          },
+          "measured_calls": {
+            "type": "integer",
+            "title": "Measured Calls"
+          },
+          "estimated_cost_usd": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimated Cost Usd"
+          }
+        },
+        "type": "object",
+        "required": [
+          "intent",
+          "calls",
+          "input_tokens",
+          "output_tokens",
+          "measured_calls",
+          "estimated_cost_usd"
+        ],
+        "title": "IntentUsage"
+      },
+      "KnowledgeInfo": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Title"
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 32000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Content"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "faq",
+              "refund",
+              "shipping",
+              "product"
+            ],
+            "title": "Category",
+            "default": "faq"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "index_mode": {
+            "type": "string",
+            "title": "Index Mode"
+          },
+          "chunk_count": {
+            "type": "integer",
+            "title": "Chunk Count"
+          },
+          "progress": {
+            "type": "integer",
+            "title": "Progress"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "content",
+          "id",
+          "status",
+          "index_mode",
+          "chunk_count",
+          "progress"
+        ],
+        "title": "KnowledgeInfo"
+      },
+      "KnowledgeInput": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Title"
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 32000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Content"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "faq",
+              "refund",
+              "shipping",
+              "product"
+            ],
+            "title": "Category",
+            "default": "faq"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "content"
+        ],
+        "title": "KnowledgeInput"
       },
       "Message": {
         "properties": {
@@ -696,19 +1929,254 @@
         ],
         "title": "Message"
       },
-      "ReviewInput": {
+      "OrderInfo": {
         "properties": {
-          "approved": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "number": {
+            "type": "string",
+            "title": "Number"
+          },
+          "product": {
+            "type": "string",
+            "title": "Product"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "delivered_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delivered Days"
+          },
+          "opened": {
             "type": "boolean",
-            "title": "Approved"
+            "title": "Opened"
+          },
+          "logistics": {
+            "type": "string",
+            "title": "Logistics"
           }
         },
-        "additionalProperties": false,
         "type": "object",
         "required": [
-          "approved"
+          "id",
+          "number",
+          "product",
+          "status",
+          "delivered_days",
+          "opened",
+          "logistics"
         ],
-        "title": "ReviewInput"
+        "title": "OrderInfo"
+      },
+      "OrderSelection": {
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Order Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "order_id"
+        ],
+        "title": "OrderSelection"
+      },
+      "StrategyMetric": {
+        "properties": {
+          "strategy": {
+            "type": "string",
+            "title": "Strategy"
+          },
+          "recall": {
+            "type": "number",
+            "title": "Recall"
+          },
+          "mrr": {
+            "type": "number",
+            "title": "Mrr"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "strategy",
+          "recall",
+          "mrr",
+          "coverage",
+          "count"
+        ],
+        "title": "StrategyMetric"
+      },
+      "SupportMessage": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant"
+            ],
+            "title": "Role"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "turn_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turn Id"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/Citation"
+            },
+            "type": "array",
+            "title": "Citations",
+            "default": []
+          },
+          "tools": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tools",
+            "default": []
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confidence"
+          },
+          "feedback": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feedback"
+          },
+          "handoff": {
+            "type": "boolean",
+            "title": "Handoff",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "title": "SupportMessage"
+      },
+      "SupportProfile": {
+        "properties": {
+          "is_operator": {
+            "type": "boolean",
+            "title": "Is Operator"
+          },
+          "mode": {
+            "type": "string",
+            "title": "Mode"
+          },
+          "threshold": {
+            "type": "number",
+            "title": "Threshold"
+          }
+        },
+        "type": "object",
+        "required": [
+          "is_operator",
+          "mode",
+          "threshold"
+        ],
+        "title": "SupportProfile"
+      },
+      "SupportThread": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/SupportMessage"
+            },
+            "type": "array",
+            "title": "Messages"
+          },
+          "orders_to_select": {
+            "items": {
+              "$ref": "#/components/schemas/OrderInfo"
+            },
+            "type": "array",
+            "title": "Orders To Select",
+            "default": []
+          },
+          "can_retry": {
+            "type": "boolean",
+            "title": "Can Retry",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "status",
+          "created_at",
+          "messages"
+        ],
+        "title": "SupportThread"
       },
       "ThreadCreate": {
         "properties": {
@@ -792,6 +2260,82 @@
         ],
         "title": "ThreadInfo"
       },
+      "TurnInfo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "intent": {
+            "type": "string",
+            "title": "Intent"
+          },
+          "review_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Review Status"
+          },
+          "correction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correction"
+          },
+          "handoff": {
+            "type": "boolean",
+            "title": "Handoff"
+          },
+          "feedback": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feedback"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "question",
+          "answer",
+          "intent",
+          "review_status",
+          "correction",
+          "handoff",
+          "feedback",
+          "created_at"
+        ],
+        "title": "TurnInfo"
+      },
       "ValidationError": {
         "properties": {
           "loc": {
@@ -831,6 +2375,44 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "backend__app__modules__customer_service__schemas__ReviewInput": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "approve",
+              "reject",
+              "expire"
+            ],
+            "title": "Action"
+          },
+          "answer": {
+            "type": "string",
+            "maxLength": 32000,
+            "title": "Answer",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "title": "ReviewInput"
+      },
+      "backend__app__modules__document_analysis__schemas__ReviewInput": {
+        "properties": {
+          "approved": {
+            "type": "boolean",
+            "title": "Approved"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "approved"
+        ],
+        "title": "ReviewInput"
       }
     }
   }

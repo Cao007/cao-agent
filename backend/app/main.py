@@ -14,6 +14,8 @@ from backend.app.db.session import create_database
 from backend.app.modules.auth.router import router as auth_router
 from backend.app.modules.chat.router import router as chat_router
 from backend.app.modules.chat.workflow.graph import create_graph as create_chat
+from backend.app.modules.customer_service.router import router as support_router
+from backend.app.modules.customer_service.workflow.graph import create_graph as create_support
 from backend.app.modules.document_analysis.router import router as analysis_router
 from backend.app.modules.document_analysis.workflow.graph import create_graph as create_analysis
 
@@ -33,6 +35,8 @@ def create_api(settings: Settings | None = None):
                 model = create_model(settings)
                 api.state.chat = create_chat(model, saver)
                 api.state.analysis = create_analysis(model, saver)
+                api.state.support_model = model
+                api.state.support = create_support(model, saver, sessions, settings)
                 yield
         finally:
             await engine.dispose()
@@ -50,6 +54,7 @@ def create_api(settings: Settings | None = None):
     api.include_router(auth_router)
     api.include_router(chat_router)
     api.include_router(analysis_router)
+    api.include_router(support_router)
 
     @api.exception_handler(Exception)
     async def unexpected_error(request: Request, exception: Exception):

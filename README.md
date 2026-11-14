@@ -1,10 +1,16 @@
-# Cao AI：轻量 AI 全栈脚手架
+# MewHelp：基于 Cao AI 框架的智能客服
 
-FastAPI + Python 3.13 + Vue 3 + LangChain/LangGraph。用于从模板创建独立业务项目：
-先与 Trae/Codex 确认需求，再协同修改后端接口、业务编排和前端页面。
+FastAPI + Python 3.13 + Vue 3 + LangChain/LangGraph。当前分支为独立客服应用：
+知识问答与引用、订单/物流工具、退款研判、订单中断点选、人工工单和知识反馈链路。
+运营工作台包含知识库、四策略 RAG 评估、待审队列、成本、主题和分类器验收。
+
+[客服运行与验收说明](docs/CUSTOMER_SERVICE.md) ·
+[框架扩展验证报告](docs/FRAMEWORK_CUSTOMER_SERVICE_ASSESSMENT.md) ·
+[来源与需求](docs/CUSTOMER_SERVICE_REQUIREMENTS.md)。
 
 默认服务只有 PostgreSQL、FastAPI 和前端；不需要 Redis、任务队列或云追踪。
-包含最小登录、会话持久化、结构化抽取、人工审核与恢复、OpenAPI 类型生成。
+复用框架的登录、会话持久化、人工审核与恢复、OpenAPI 类型生成。
+原框架示例仍可通过 `/chat`、`/analysis` 访问，默认入口为 `/support`。
 
 ## Docker 启动
 
